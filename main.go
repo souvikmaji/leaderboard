@@ -16,15 +16,15 @@ const (
 	indexFile = "index.html"
 )
 
+// health check endpoint
 func healthCheck(w http.ResponseWriter, r *http.Request) {
-	// health check endpoint
 	json.NewEncoder(w).Encode(map[string]bool{"ok": true})
 }
 
 func setupRouter() *mux.Router {
 	router := mux.NewRouter()
 
-	router.HandleFunc("/api/health", healthCheck)
+	router.HandleFunc("/health", healthCheck)
 
 	spa := handler{staticPath: staticDir, indexPath: indexFile}
 	router.PathPrefix("/").Handler(spa)
