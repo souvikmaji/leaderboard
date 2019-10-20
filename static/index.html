@@ -21,21 +21,21 @@
       <table id="table_id" class="display table table-responsive-md table-hover">
         <thead class="table-info">
           <tr>
-            <th scope="col">Column 1</th>
-            <th scope="col">Column 2</th>
-            <th scope="col">Column 3</th>
+            <th scope="col">Rank</th>
+            <th scope="col">Team Name</th>
+            <th scope="col">Total Score</th>
           </tr>
         </thead>
         <tbody>
           <tr>
             <th scope="row">1</th>
-            <td>Row 1 Data 1</td>
-            <td>Row 1 Data 2</td>
+            <td>team name</td>
+            <td>100.01</td>
           </tr>
           <tr>
             <th scope="row">2</th>
-            <td>Row 2 Data 1</td>
-            <td>Row 2 Data 2</td>
+            <td>team 2</td>
+            <td>34.23</td>
           </tr>
         </tbody>
       </table>
@@ -54,7 +54,12 @@
     <script type="text/javascript" src="https://cdn.datatables.net/scroller/2.0.1/js/dataTables.scroller.min.js"></script>
     <script charset="utf-8">
       $(document).ready(function() {
-        $('#table_id').DataTable();
+        let options = {
+          // "processing": true,
+          "serverSide": true,
+          "ajax": "/teams"
+        }
+        $('#table_id').DataTable(options);
       });
     </script>
   </body>
