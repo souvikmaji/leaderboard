@@ -1,0 +1,19 @@
+{
+  "addons": [
+
+  ],
+  "buildpacks": [
+    {
+      "url": "heroku/go"
+    }
+  ],
+  "env": {
+    "DBNAME": "leaderboard"
+  },
+  "formation": {
+  },
+  "name": "leaderboard",
+  "scripts": {
+  },
+  "stack": "heroku-18"
+}
