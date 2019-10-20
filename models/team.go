@@ -2,12 +2,12 @@ package models
 
 // Team represets a fanatasy team created by the user consisting of many players
 type Team struct {
-	teamID     int64
-	teamName   string
-	userID     int64
-	matchID    int64
-	captainID  int64
-	vcaptainID int64
-	totalScore int64
-	players    []*Player
+	TeamID     uint `gorm:"primary_key"`
+	TeamName   string
+	UserID     int64
+	MatchID    int64
+	CaptainID  int64
+	VCaptainID int64
+	TotalScore float64
+	Players    []*Player `gorm:"many2many:team_players;association_foreignkey:id;foreignkey:team_id"`
 }
