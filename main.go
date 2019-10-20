@@ -33,17 +33,21 @@ func setupRouter() *mux.Router {
 }
 
 func main() {
-	port := flag.Int("port", 8000, "port number for the http server")
-	flag.Parse()
+	configuration := models.InitConfig()
 
-	listenAddr := fmt.Sprintf("127.0.0.1:%d", *port)
-
+	listenAddr := configuration.GetServerAddress()
 	srv := &http.Server{
 		Handler:      setupRouter(),
 		Addr:         listenAddr,
 		WriteTimeout: 15 * time.Second,
 		ReadTimeout:  15 * time.Second,
 	}
+
+	db, err := gorm.Open("postgres", configuration.GetDbURI())
+	if err != nil {
+		panic("failed to connect database" + err.Error())
+	}
+	defer db.Close()
 
 	log.Println("Server is ready to handle requests at", listenAddr)
 	if err := srv.ListenAndServe(); err != nil && err != http.ErrServerClosed {
