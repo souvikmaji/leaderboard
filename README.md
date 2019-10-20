@@ -6,7 +6,7 @@ MMOG Leaderboard
 
 ### Prerequisites
 
-1. Go version 1.12 or higher
+1. Go version 1.13
 2. make
 3. PostgreSQL
 
