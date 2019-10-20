@@ -2,18 +2,16 @@
   "addons": [
 
   ],
-  "buildpacks": [
-    {
-      "url": "heroku/go"
-    }
-  ],
+  "buildpacks": [{
+    "url": "heroku/go"
+  }],
   "env": {
     "DBNAME": "leaderboard"
   },
-  "formation": {
-  },
+  "formation": {},
   "name": "leaderboard",
-  "scripts": {
-  },
-  "stack": "heroku-18"
+  "scripts": {},
+  "stack": "heroku-18",
+  "website": "https://github.com/souvikmaji/leaderboard",
+  "repository": "https://github.com/souvikmaji/leaderboard"
 }
