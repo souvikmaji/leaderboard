@@ -2,8 +2,9 @@ $(document).ready(function () {
   let options = {
     processing: true,
     serverSide: true,
-    pagingType: "full_numbers",
+    pagingType: "simple_numbers",
     ordering: false,
+    searching: false,
     ajax: {
       url: "/teams",
       dataSrc: 'data'
