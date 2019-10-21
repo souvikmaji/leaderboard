@@ -30,8 +30,8 @@ func sendError(w http.ResponseWriter, errMsg error) {
 	w.Write(e)
 }
 
-func sendResponse(w http.ResponseWriter, draw int64, teams []*models.Team, totalCount int64) error {
-	response := models.NewSuccessResponse(draw, teams, totalCount)
+func sendResponse(w http.ResponseWriter, draw int64, teams []*models.Team, totalCount, totalFiltered int64) error {
+	response := models.NewSuccessResponse(draw, teams, totalCount, totalFiltered)
 	e, err := json.Marshal(response)
 	if err != nil {
 		return err
@@ -67,13 +67,13 @@ func (env *Env) Teams(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	teams, totalCount, err := env.db.AllTeams(length, offset)
+	teams, totalCount, totalFiltered, err := env.db.AllTeams(length, offset)
 	if err != nil {
 		sendError(w, err)
 		return
 	}
 
-	if err := sendResponse(w, draw, teams, totalCount); err != nil {
+	if err := sendResponse(w, draw, teams, totalCount, totalFiltered); err != nil {
 		sendError(w, err)
 		return
 	}
