@@ -9,6 +9,7 @@ import (
 	"time"
 
 	"github.com/gorilla/mux"
+	"github.com/urfave/negroni"
 )
 
 const (
@@ -24,10 +25,9 @@ func healthCheck(w http.ResponseWriter, r *http.Request) {
 func setupRouter() *mux.Router {
 	router := mux.NewRouter()
 
-	router.HandleFunc("/health", healthCheck)
+	router.HandleFunc("/teams", env.Teams)
 
-	spa := handler{staticPath: staticDir, indexPath: indexFile}
-	router.PathPrefix("/").Handler(spa)
+	router.PathPrefix("/").Handler(negroni.Classic())
 
 	return router
 }
