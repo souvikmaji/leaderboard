@@ -60,7 +60,14 @@ func (env *Env) Teams(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	teams, totalCount, err := env.db.AllTeams(length)
+	offsetStr := params.Get("start")
+	offset, err := strconv.ParseInt(offsetStr, 10, 64)
+	if err != nil {
+		sendError(w, err)
+		return
+	}
+
+	teams, totalCount, err := env.db.AllTeams(length, offset)
 	if err != nil {
 		sendError(w, err)
 		return

@@ -7,6 +7,9 @@ $(document).ready(function () {
       dataSrc: 'data'
     },
     columns: [{
+        data: 'Rank'
+      },
+      {
         data: 'TeamID'
       },
       {

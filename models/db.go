@@ -4,9 +4,9 @@ import (
 	"github.com/jinzhu/gorm"
 )
 
-// Datastore ...
+// Datastore interface defines operations possible on the database for this app
 type Datastore interface {
-	AllTeams(int64) ([]*Team, int64, error)
+	AllTeams(int64, int64) ([]*Team, int64, error)
 }
 
 // DB is the wrapper for gorm db object
