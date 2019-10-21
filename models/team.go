@@ -14,14 +14,16 @@ type Team struct {
 }
 
 // AllTeams fetches all fantassy teams from the database
+// func (db *DB) AllTeams(length, offset int64, orderBy, dir string) (teams []*Team, recordsTotal, recordsFiltered int64, err error) {
 func (db *DB) AllTeams(length, offset int64) (teams []*Team, recordsTotal, recordsFiltered int64, err error) {
-	// var teams []*Team
-
 	db.Model(&Team{}).Count(&recordsTotal)
 
-	db.Model(&Team{}).Count(&recordsFiltered)
+	sqlDB := db.DB
 
-	db.Select("*, RANK () OVER ( ORDER BY total_score desc) rank").Order("total_score desc").Offset(offset).Limit(length).Find(&teams)
+	sqlDB = sqlDB.Model(&Team{}).Order("total_score desc")
+
+	sqlDB.Count(&recordsFiltered)
+	sqlDB.Select("*, RANK () OVER ( ORDER BY total_score desc) rank").Offset(offset).Limit(length).Find(&teams)
 
 	return
 }

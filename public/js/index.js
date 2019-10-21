@@ -3,6 +3,7 @@ $(document).ready(function () {
     processing: true,
     serverSide: true,
     pagingType: "full_numbers",
+    ordering: false,
     ajax: {
       url: "/teams",
       dataSrc: 'data'
@@ -12,14 +13,14 @@ $(document).ready(function () {
       },
       {
         data: 'TeamID',
-        orderable: false
+        // orderable: false
       },
       {
         data: 'TeamName'
       },
       {
         data: 'TotalScore',
-        orderable: false
+        // orderable: false
       }
     ],
     error: function (xhr, textStatus, error) {
