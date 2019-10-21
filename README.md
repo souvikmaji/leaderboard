@@ -17,8 +17,8 @@ Create a database from the psql console with `CREATE DATABASE databasename` or u
 git clone https://github.com/souvikmaji/leaderboard
 cd leaderboard
 
-# DB setup
-psql -U username -d databasename -a -f scripts/setup.sql
+# DB setup from the database dump
+psql databasename < scripts/dbdump
 
 # Build and run
 make
