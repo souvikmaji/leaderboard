@@ -2,6 +2,7 @@ $(document).ready(function () {
   let options = {
     processing: true,
     serverSide: true,
+    pagingType: "full_numbers",
     ajax: {
       url: "/teams",
       dataSrc: 'data'
@@ -10,13 +11,15 @@ $(document).ready(function () {
         data: 'Rank'
       },
       {
-        data: 'TeamID'
+        data: 'TeamID',
+        orderable: false
       },
       {
         data: 'TeamName'
       },
       {
-        data: 'TotalScore'
+        data: 'TotalScore',
+        orderable: false
       }
     ],
     error: function (xhr, textStatus, error) {
