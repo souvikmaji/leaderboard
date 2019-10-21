@@ -40,34 +40,7 @@
     <script type="text/javascript" src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>
     <script type="text/javascript" src="https://cdn.datatables.net/responsive/2.2.3/js/responsive.bootstrap4.min.js"></script>
     <script type="text/javascript" src="https://cdn.datatables.net/scroller/2.0.1/js/dataTables.scroller.min.js"></script>
-    <script charset="utf-8">
-      $(document).ready(function() {
-        let options = {
-          processing: true,
-          serverSide: true,
-          ajax: {
-            url: "/teams",
-            dataSrc: 'data'
-          },
-          columns: [{
-              data: 'TeamID'
-            },
-            {
-              data: 'TeamName'
-            },
-            {
-              data: 'TotalScore'
-            }
-          ],
-          error: function(xhr, textStatus, error) {
-            console.log("error: ",textStatus);
-          }
-          // "deferRender": true
-        };
-
-        $('#teams').DataTable(options);
-      });
-    </script>
+    <script type="text/javascript" src="/js/index.js"></script>
   </body>
 
 </html>
