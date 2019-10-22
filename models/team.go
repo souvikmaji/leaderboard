@@ -23,7 +23,7 @@ func (db *DB) AllTeams(length, offset int64) (teams []*Team, recordsTotal, recor
 	sqlDB = sqlDB.Model(&Team{}).Order("total_score desc")
 
 	sqlDB.Count(&recordsFiltered)
-	sqlDB.Select("*, RANK () OVER ( ORDER BY total_score desc) rank").Offset(offset).Limit(length).Find(&teams)
+	sqlDB.Select("*, RANK () OVER (ORDER BY total_score desc) rank").Offset(offset).Limit(length).Find(&teams)
 
 	return
 }

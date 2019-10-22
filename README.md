@@ -4,7 +4,8 @@ Standalone REST web service to generate Fantasy sports leaderboard.
 
 Leaderboards in MMOGs and Fantasy sports are the most accessed screens. What makes fantasy leaderboard little complex than any other rank based leaderboards is that two or more players can share the same rank. The ranks of the players holding the same score should remain the same and the next succeeding rank to be allocated to the next player and so on.
 
-We are using the SQL [rank function](http://www.sqltutorial.org/sql-window-functions/sql-rank/) to calculate team ranks.
+In this project we are using the SQL [rank function](http://www.sqltutorial.org/sql-window-functions/sql-rank/) to calculate team ranks.
+In the SQL RANK functions, we use the `OVER()` clause to define the entire table is being considered for calculation of the rank. The `ORDER BY` clause is used to sort the results in a descending order. 
 
 ## Run in local environment:
 
