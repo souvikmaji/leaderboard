@@ -35,10 +35,12 @@ func InitConfig() *Configurations {
 	// Set the path to look for the configurations file
 	viper.AddConfigPath(".")
 
+	viper.SetConfigType("yml")
+
 	// Enable VIPER to read Environment Variables
 	viper.AutomaticEnv()
 
-	viper.SetConfigType("yml")
+	viper.BindEnv("server.port", "PORT")
 
 	if err := viper.ReadInConfig(); err != nil {
 		fmt.Printf("Error reading config file, %s", err)
