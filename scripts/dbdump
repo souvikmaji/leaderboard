@@ -2370,7 +2370,7 @@ COPY public.teams (team_id, team_name, user_id, match_id, captain_id, v_captain_
 226	agelling69	88304	4461	116	78	578.16
 227	mbrilleman6a	976667	5668	331	936	514.44
 228	dmunns6b	621431	3536	455	697	1074.97
-229	cgossage6c	890490	2714	740	33	1099.81
+229	cgossage6c	890490	2714	740	33	1099.2
 230	ytapply6d	283972	5498	638	927	534.83
 231	sslinger6e	42806	7701	189	106	868.13
 232	wobreen6f	587235	3099	47	925	763.89
@@ -3186,4 +3186,3 @@ ALTER TABLE ONLY public.teams
 --
 -- PostgreSQL database dump complete
 --
-
