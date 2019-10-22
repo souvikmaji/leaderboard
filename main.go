@@ -11,10 +11,10 @@ import (
 	"github.com/urfave/negroni"
 )
 
-func (env *Env) setupRouter() *negroni.Negroni {
+func (e *env) setupRouter() *negroni.Negroni {
 	router := mux.NewRouter()
 
-	router.HandleFunc("/teams", env.Teams)
+	router.HandleFunc("/teams", e.Teams)
 	router.PathPrefix("/")
 
 	n := negroni.Classic()
@@ -32,11 +32,11 @@ func main() {
 	}
 	defer db.Close()
 
-	env := &Env{db}
+	e := &env{db}
 
 	listenAddr := configuration.GetServerAddress()
 	srv := &http.Server{
-		Handler:      env.setupRouter(),
+		Handler:      e.setupRouter(),
 		Addr:         listenAddr,
 		WriteTimeout: 15 * time.Second,
 		ReadTimeout:  15 * time.Second,

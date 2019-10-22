@@ -9,7 +9,9 @@ import (
 	"github.com/souvikmaji/leaderboard/models"
 )
 
-type Env struct {
+// all routes are implemented as method to this struct,
+// so that all routes can share the connection pool
+type env struct {
 	db models.Datastore
 }
 
@@ -42,7 +44,7 @@ func sendResponse(w http.ResponseWriter, draw int64, teams []*models.Team, total
 	return nil
 }
 
-func (env *Env) Teams(w http.ResponseWriter, r *http.Request) {
+func (e *env) Teams(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 	params := r.URL.Query()
 
@@ -67,7 +69,7 @@ func (env *Env) Teams(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	teams, totalCount, totalFiltered, err := env.db.AllTeams(length, offset)
+	teams, totalCount, totalFiltered, err := e.db.AllTeams(length, offset)
 	if err != nil {
 		sendError(w, err)
 		return
