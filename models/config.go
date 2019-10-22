@@ -20,6 +20,7 @@ type ServerConfigurations struct {
 
 // DatabaseConfigurations represents postgre db credentials
 type DatabaseConfigurations struct {
+	URL      string
 	Host     string
 	Port     int
 	Name     string
@@ -41,6 +42,7 @@ func InitConfig() *Configurations {
 	viper.AutomaticEnv()
 
 	viper.BindEnv("server.port", "PORT")
+	viper.BindEnv("database.url", "DATABASE_URL")
 
 	if err := viper.ReadInConfig(); err != nil {
 		fmt.Printf("Error reading config file, %s", err)
@@ -64,6 +66,9 @@ func (c *Configurations) GetServerAddress() string {
 // GetDbURI parses configurations and returns database server address in
 // postgreSQL connection string format
 func (c *Configurations) GetDbURI() string {
-	return fmt.Sprintf("host=%s port=%d user=souvik dbname=%s sslmode=disable",
-		c.Database.Host, c.Database.Port, c.Database.Name)
+	if c.Database.URL != "" {
+		return c.Database.URL
+	}
+	return fmt.Sprintf("host=%s port=%d user=%s dbname=%s sslmode=disable",
+		c.Database.Host, c.Database.Port, c.Database.Username, c.Database.Name)
 }
