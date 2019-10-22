@@ -29,7 +29,7 @@ func NewDB(dataSourceName string) (*DB, error) {
 		return nil, err
 	}
 
-	log.Println("Connection established with db", dataSourceName)
+	log.Println("Connection established with db")
 
 	// return db wrapper
 	return &DB{db}, nil
