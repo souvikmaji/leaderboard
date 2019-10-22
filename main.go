@@ -42,7 +42,7 @@ func main() {
 		ReadTimeout:  15 * time.Second,
 	}
 
-	// db.LogMode(true)
+	db.LogMode(configuration.Database.Logmode)
 
 	log.Println("Server is ready to handle requests at", listenAddr)
 	if err := srv.ListenAndServe(); err != nil && err != http.ErrServerClosed {

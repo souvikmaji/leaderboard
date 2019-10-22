@@ -7,6 +7,8 @@ Leaderboards in MMOGs and Fantasy sports are the most accessed screens. What mak
 In this project we are using the SQL [rank function](http://www.sqltutorial.org/sql-window-functions/sql-rank/) to calculate team ranks.
 In the SQL RANK functions, we use the `OVER()` clause to define the entire table is being considered for calculation of the rank. The `ORDER BY` clause is used to sort the results in a descending order.
 
+Too see the database queries being generated while fetching data, set `database.logmode: true` in the config.yml file.
+
 ## Run in local environment:
 
 ### Prerequisites

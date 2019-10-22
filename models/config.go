@@ -26,6 +26,7 @@ type DatabaseConfigurations struct {
 	Name     string
 	Username string
 	Password string
+	Logmode  bool
 }
 
 // InitConfig initializes a new configuration object denoting app configurations
@@ -41,9 +42,11 @@ func InitConfig() *Configurations {
 	// Enable VIPER to read Environment Variables
 	viper.AutomaticEnv()
 
+	// rewrite config keys for heroku's use
 	viper.BindEnv("server.port", "PORT")
 	viper.BindEnv("database.url", "DATABASE_URL")
 
+	// read config
 	if err := viper.ReadInConfig(); err != nil {
 		fmt.Printf("Error reading config file, %s", err)
 	}
