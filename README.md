@@ -40,3 +40,12 @@ Visit: <127.0.0.1:8000>
 - [Gorm as ORM](https://gorm.io/)
 - [PostgreSQL as our database](https://www.postgresql.org/)
 - [Datatables as the UI framework to display the leaderboard](https://datatables.net/)
+
+## Things that can be improved / TODO:
+
+- Unit tests
+- Hosting
+- Use datatable sorting feature
+- refactor logic for query parameter parsing
+- shields
+- test with a larger dataset
