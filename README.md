@@ -46,6 +46,6 @@ Visit: <127.0.0.1:8000>
 - Unit tests
 - Hosting
 - Use datatable sorting feature
-- refactor logic for query parameter parsing
-- shields
+- refactor logic for query parameter parsing from the controller
+- shields 
 - test with a larger dataset
