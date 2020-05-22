@@ -1,5 +1,8 @@
 # Leaderboard
 
+![GitHub](https://img.shields.io/github/license/souvikmaji/leaderboard)
+![Codacy grade](https://img.shields.io/codacy/grade/a0b36eaed7b74ec6be460ceda499bf2c)
+
 Standalone REST web service to generate Fantasy sports leaderboard.
 
 Leaderboards in MMOGs and Fantasy sports are the most accessed screens. What makes fantasy leaderboard little complex than any other rank-based leaderboards is that two or more players can share the same rank. The ranks of the players holding the same score should remain the same and the next succeeding rank to be allocated to the next player and so on.
@@ -48,5 +51,4 @@ Visit: <127.0.0.1:8000>
 - Hosting
 - Use datatable sorting feature
 - refactor logic for query parameter parsing from the controller
-- shields 
 - test with a larger dataset
