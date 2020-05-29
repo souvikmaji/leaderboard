@@ -16,38 +16,53 @@ To see the database queries being generated while fetching data, set `database.l
 
 ### Prerequisites
 
-1.  Go version 1.13
+1.  Go with minimum version 1.13
 2.  make
 3.  PostgreSQL
 
-Create a database from the psql console with `CREATE DATABASE databasename` or use the `createdb` tool (`createdb databasename`).
+### Setup
+
+Create a database from the psql console with `CREATE DATABASE leaderboard;` or use the `createdb` tool (`createdb leaderboard`).
+
+Check if the database is being created successfully using `\l`. It will list all the databases for the current user.
+
+Run the following script to complete setup.
 
 ```sh
 # Get the code
 git clone https://github.com/souvikmaji/leaderboard
 cd leaderboard
 
-# DB setup from the database dump
-psql databasename < scripts/dbdump
+# Initialize data from the database dump
+psql leaderboard < scripts/dbdump
 
 # Build and run
 make
 ```
 
-Visit: &lt;127.0.0.1:8000>
+The default db name is `leaderboard`. To change the database name update the `config.yml` file or export corresponding environment variables.
+
+Update
+
+For running psql from a postgres user add `sudo -u postgres` at the begining of the command.
+
+Visit: [127.0.0.1:8000](127.0.0.1:8000)
 
 ## Technologies Used
 
 -   [Golang](https://golang.org/)
+-   [GNU Make](https://www.gnu.org/software/make/manual/html_node/Introduction.html)
 -   [Gorilla Mux as the HTTP router and URL matcher](https://github.com/gorilla/mux)
 -   [Gorm as ORM](https://gorm.io/)
--   [PostgreSQL as our database](https://www.postgresql.org/)
+-   [Viper for externalized configuration](https://github.com/spf13/viper)
+-   [PostgreSQL as the database](https://www.postgresql.org/)
 -   [Datatables as the UI framework to display the leaderboard](https://datatables.net/)
 
-## Things that can be improved / TODO:
+## Things that can be improved / TODO
 
 -   Unit tests
 -   Hosting
 -   Use datatable sorting feature
--   refactor logic for query parameter parsing from the controller
--   test with a larger dataset
+-   Refactor logic for query parameter parsing from the controller
+-   Read database credentials at app start for the first time.
+-   Test with a larger dataset
