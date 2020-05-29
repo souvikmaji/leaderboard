@@ -1,7 +1,6 @@
 # Leaderboard
 
-![GitHub](https://img.shields.io/github/license/souvikmaji/leaderboard)
-![Codacy grade](https://img.shields.io/codacy/grade/a0b36eaed7b74ec6be460ceda499bf2c)
+![GitHub](https://img.shields.io/github/license/souvikmaji/leaderboard) ![Codacy grade](https://img.shields.io/codacy/grade/a0b36eaed7b74ec6be460ceda499bf2c)
 
 Standalone REST web service to generate Fantasy sports leaderboard.
 
@@ -17,9 +16,9 @@ To see the database queries being generated while fetching data, set `database.l
 
 ### Prerequisites
 
-  1. Go version 1.13
-  2. make
-  3. PostgreSQL
+1.  Go version 1.13
+2.  make
+3.  PostgreSQL
 
 Create a database from the psql console with `CREATE DATABASE databasename` or use the `createdb` tool (`createdb databasename`).
 
@@ -35,20 +34,20 @@ psql databasename < scripts/dbdump
 make
 ```
 
-Visit: <127.0.0.1:8000>
+Visit: &lt;127.0.0.1:8000>
 
 ## Technologies Used
 
-  - [Golang](https://golang.org/)
-  - [Gorilla Mux as the HTTP router and URL matcher](https://github.com/gorilla/mux)
-  - [Gorm as ORM](https://gorm.io/)
-  - [PostgreSQL as our database](https://www.postgresql.org/)
-  - [Datatables as the UI framework to display the leaderboard](https://datatables.net/)
+-   [Golang](https://golang.org/)
+-   [Gorilla Mux as the HTTP router and URL matcher](https://github.com/gorilla/mux)
+-   [Gorm as ORM](https://gorm.io/)
+-   [PostgreSQL as our database](https://www.postgresql.org/)
+-   [Datatables as the UI framework to display the leaderboard](https://datatables.net/)
 
 ## Things that can be improved / TODO:
 
-- Unit tests
-- Hosting
-- Use datatable sorting feature
-- refactor logic for query parameter parsing from the controller
-- test with a larger dataset
+-   Unit tests
+-   Hosting
+-   Use datatable sorting feature
+-   refactor logic for query parameter parsing from the controller
+-   test with a larger dataset
