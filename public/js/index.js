@@ -7,20 +7,20 @@ $(document).ready(function () {
     searching: false,
     ajax: {
       url: "/teams",
-      dataSrc: 'data'
+      dataSrc: "data"
     },
     columns: [{
-        data: 'Rank'
+        data: "Rank"
       },
       {
-        data: 'TeamID',
+        data: "TeamID",
         // orderable: false
       },
       {
-        data: 'TeamName'
+        data: "TeamName"
       },
       {
-        data: 'TotalScore',
+        data: "TotalScore",
         // orderable: false
       }
     ],
@@ -30,5 +30,5 @@ $(document).ready(function () {
     // "deferRender": true
   };
 
-  $('#teams').DataTable(options);
+  $("#teams").DataTable(options);
 });
