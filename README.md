@@ -13,13 +13,13 @@ The `OVER()` clause In the SQL RANK function is used to define that the entire t
 
 To see the database queries being generated while fetching data, set `database.logmode: true` in the config.yml file.
 
-## Run in local environment:
+## Run in local environment
 
 ### Prerequisites
 
-1. Go version 1.13
-2. make
-3. PostgreSQL
+  1. Go version 1.13
+  2. make
+  3. PostgreSQL
 
 Create a database from the psql console with `CREATE DATABASE databasename` or use the `createdb` tool (`createdb databasename`).
 
@@ -39,11 +39,11 @@ Visit: <127.0.0.1:8000>
 
 ## Technologies Used
 
-- [Golang](https://golang.org/)
-- [Gorilla Mux as the HTTP router and URL matcher](https://github.com/gorilla/mux)
-- [Gorm as ORM](https://gorm.io/)
-- [PostgreSQL as our database](https://www.postgresql.org/)
-- [Datatables as the UI framework to display the leaderboard](https://datatables.net/)
+  - [Golang](https://golang.org/)
+  - [Gorilla Mux as the HTTP router and URL matcher](https://github.com/gorilla/mux)
+  - [Gorm as ORM](https://gorm.io/)
+  - [PostgreSQL as our database](https://www.postgresql.org/)
+  - [Datatables as the UI framework to display the leaderboard](https://datatables.net/)
 
 ## Things that can be improved / TODO:
 
