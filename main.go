@@ -14,7 +14,7 @@ import (
 func (e *env) setupRouter() *negroni.Negroni {
 	router := mux.NewRouter()
 
-	router.HandleFunc("/teams", e.Teams)
+	router.HandleFunc("/team_leaderboard", e.getTeamLeaderboard)
 	router.PathPrefix("/")
 
 	n := negroni.Classic()

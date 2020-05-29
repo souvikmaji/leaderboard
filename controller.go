@@ -44,7 +44,7 @@ func sendResponse(w http.ResponseWriter, draw int64, teams []*models.Team, total
 	return nil
 }
 
-func (e *env) Teams(w http.ResponseWriter, r *http.Request) {
+func (e *env) getTeamLeaderboard(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 	params := r.URL.Query()
 
