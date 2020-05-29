@@ -72,6 +72,13 @@ func (c *Configurations) GetDbURI() string {
 	if c.Database.URL != "" {
 		return c.Database.URL
 	}
-	return fmt.Sprintf("host=%s port=%d user=%s dbname=%s sslmode=disable",
+
+	connectionString := fmt.Sprintf("host=%s port=%d user=%s dbname=%s sslmode=disable",
 		c.Database.Host, c.Database.Port, c.Database.Username, c.Database.Name)
+
+	if c.Database.Password != "" {
+		connectionString = fmt.Sprintf("%s password=%s", connectionString, c.Database.Password)
+	}
+
+	return connectionString
 }
