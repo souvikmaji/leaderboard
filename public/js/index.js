@@ -1,4 +1,7 @@
 $(document).ready(function () {
+  // Hide dataTable error alert
+  $.fn.dataTable.ext.errMode = 'throw';
+
   let options = {
     processing: true,
     serverSide: true,
