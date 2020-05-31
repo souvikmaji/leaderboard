@@ -24,14 +24,14 @@ func newTeam(teamName string, userID, matchID, captainID, vCaptainID int64) *Tea
 }
 
 // CreateTeam creates a new team in the database
-func (db *DB) CreateTeam(teamName string, userID, matchID, captainID, vCaptainID int64) (team *Team) {
+func (db *DB) CreateTeam(teamName string, userID, matchID, captainID, vCaptainID int64) (team *Team, err error) {
 	team = newTeam(teamName, userID, matchID, captainID, vCaptainID)
 
-	sqlDB := db.DB
+	if err = db.DB.Create(team).Error; err != nil {
+		return
+	}
 
-	sqlDB.Create(team)
-
-	return team
+	return
 }
 
 // AllTeams fetches all fantassy teams from the database
@@ -44,7 +44,9 @@ func (db *DB) AllTeams(length, offset int64) (teams []*Team, recordsTotal, recor
 	sqlDB = sqlDB.Model(&Team{}).Order("total_score desc")
 
 	sqlDB.Count(&recordsFiltered)
-	sqlDB.Select("*, RANK () OVER (ORDER BY total_score desc) rank").Offset(offset).Limit(length).Find(&teams)
+	if err = sqlDB.Select("*, RANK () OVER (ORDER BY total_score desc) rank").Offset(offset).Limit(length).Find(&teams).Error; err != nil {
+		return
+	}
 
 	return
 }
