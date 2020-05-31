@@ -14,8 +14,9 @@ import (
 func (e *env) setupRouter() *negroni.Negroni {
 	router := mux.NewRouter()
 
-	router.HandleFunc("/team_leaderboard", e.getTeamLeaderboard)
-	router.PathPrefix("/")
+	teamRouter := router.PathPrefix("/team").Subrouter()
+	teamRouter.HandleFunc("/", e.createTeam).Methods("POST")
+	teamRouter.HandleFunc("/leaderboard", e.getTeamLeaderboard)
 
 	n := negroni.Classic()
 	n.UseHandler(router)

@@ -6,7 +6,7 @@ $(document).ready(function () {
     ordering: false,
     searching: false,
     ajax: {
-      url: "/team_leaderboard",
+      url: "/team/leaderboard",
       dataSrc: "data"
     },
     columns: [{

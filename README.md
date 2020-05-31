@@ -63,6 +63,5 @@ Visit: [127.0.0.1:8000](127.0.0.1:8000)
 -   Unit tests
 -   Hosting
 -   Use datatable sorting feature
--   Refactor logic for query parameter parsing from the controller
 -   Read database credentials at app start for the first time.
 -   Test with a larger dataset
