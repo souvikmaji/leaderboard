@@ -1,6 +1,6 @@
 $(document).ready(function () {
   // Hide dataTable error alert
-  $.fn.dataTable.ext.errMode = 'throw';
+  $.fn.dataTable.ext.errMode = "throw";
 
   let options = {
     processing: true,
