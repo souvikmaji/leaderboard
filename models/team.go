@@ -13,6 +13,27 @@ type Team struct {
 	Players    []*Player `gorm:"many2many:team_players;association_foreignkey:id;foreignkey:team_id"`
 }
 
+func newTeam(teamName string, userID, matchID, captainID, vCaptainID int64) *Team {
+	return &Team{
+		TeamName:   teamName,
+		UserID:     userID,
+		MatchID:    matchID,
+		CaptainID:  captainID,
+		VCaptainID: vCaptainID,
+	}
+}
+
+// CreateTeam creates a new team in the database
+func (db *DB) CreateTeam(teamName string, userID, matchID, captainID, vCaptainID int64) (team *Team) {
+	team = newTeam(teamName, userID, matchID, captainID, vCaptainID)
+
+	sqlDB := db.DB
+
+	sqlDB.Create(team)
+
+	return team
+}
+
 // AllTeams fetches all fantassy teams from the database
 // func (db *DB) AllTeams(length, offset int64, orderBy, dir string) (teams []*Team, recordsTotal, recordsFiltered int64, err error) {
 func (db *DB) AllTeams(length, offset int64) (teams []*Team, recordsTotal, recordsFiltered int64, err error) {

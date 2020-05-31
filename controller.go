@@ -44,6 +44,44 @@ func sendResponse(w http.ResponseWriter, draw int64, teams []*models.Team, total
 	return nil
 }
 
+func (e *env) createTeam(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Content-Type", "application/json")
+	params := r.URL.Query()
+
+	drawStr := params.Get("draw")
+	draw, err := strconv.ParseInt(drawStr, 10, 64)
+	if err != nil {
+		sendError(w, err)
+		return
+	}
+
+	lengthStr := params.Get("length")
+	length, err := strconv.ParseInt(lengthStr, 10, 64)
+	if err != nil {
+		sendError(w, err)
+		return
+	}
+
+	offsetStr := params.Get("start")
+	offset, err := strconv.ParseInt(offsetStr, 10, 64)
+	if err != nil {
+		sendError(w, err)
+		return
+	}
+
+	teams, totalCount, totalFiltered, err := e.db.AllTeams(length, offset)
+	if err != nil {
+		sendError(w, err)
+		return
+	}
+
+	if err := sendResponse(w, draw, teams, totalCount, totalFiltered); err != nil {
+		sendError(w, err)
+		return
+	}
+
+}
+
 func (e *env) getTeamLeaderboard(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 	params := r.URL.Query()
