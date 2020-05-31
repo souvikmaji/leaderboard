@@ -2,17 +2,18 @@ package main
 
 import (
 	"encoding/json"
+	"fmt"
 	"github.com/gorilla/schema"
 	"github.com/souvikmaji/leaderboard/models"
 	"log"
 	"net/http"
-	"strconv"
 )
 
 // all routes are implemented as method to this struct,
 // so that all routes can share the connection pool
 type env struct {
-	db models.Datastore
+	db      models.Datastore
+	decoder *schema.Decoder
 }
 
 // health check endpoint
@@ -45,10 +46,9 @@ func sendResponse(w http.ResponseWriter, response interface{}) error {
 
 func (e *env) createTeam(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
-	params := r.URL.Query()
 
-	drawStr := params.Get("draw")
-	draw, err := strconv.ParseInt(drawStr, 10, 64)
+	team := new(models.Team)
+	err := e.decoder.Decode(team, r.PostForm)
 	if err != nil {
 		sendError(w, err)
 		return
@@ -83,11 +83,9 @@ func (e *env) createTeam(w http.ResponseWriter, r *http.Request) {
 
 func (e *env) getTeamLeaderboard(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
-	params := r.URL.Query()
 
 	leaderboardQuery := new(models.LeaderboardQuery)
-	decoder := schema.NewDecoder()
-	decoder.Decode(leaderboardQuery, params)
+	e.decoder.Decode(leaderboardQuery, r.URL.Query())
 
 	teams, totalCount, totalFiltered, err := e.db.AllTeams(leaderboardQuery.Length, leaderboardQuery.Start)
 	if err != nil {

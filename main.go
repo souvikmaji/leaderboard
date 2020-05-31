@@ -6,6 +6,7 @@ import (
 	"time"
 
 	"github.com/gorilla/mux"
+	"github.com/gorilla/schema"
 	_ "github.com/jinzhu/gorm/dialects/postgres"
 	"github.com/souvikmaji/leaderboard/models"
 	"github.com/urfave/negroni"
@@ -34,7 +35,10 @@ func main() {
 	}
 	defer db.Close()
 
-	e := &env{db}
+	e := &env{
+		db:      db,
+		decoder: schema.NewDecoder(),
+	}
 
 	listenAddr := configuration.GetServerAddress()
 	srv := &http.Server{
