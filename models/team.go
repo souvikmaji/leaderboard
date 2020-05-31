@@ -10,7 +10,6 @@ type Team struct {
 	VCaptainID int64
 	TotalScore float64
 	Rank       int64     `gorn:"-"`
-	Players    []*Player `gorm:"many2many:team_players;association_foreignkey:id;foreignkey:team_id"`
 }
 
 func newTeam(teamName string, userID, matchID, captainID, vCaptainID int64) *Team {
