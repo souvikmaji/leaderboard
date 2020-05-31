@@ -32,8 +32,7 @@ func sendError(w http.ResponseWriter, errMsg error) {
 	w.Write(e)
 }
 
-func sendResponse(w http.ResponseWriter, draw int64, teams []*models.Team, totalCount, totalFiltered int64) error {
-	response := models.NewSuccessResponse(draw, teams, totalCount, totalFiltered)
+func sendResponse(w http.ResponseWriter, response interface{}) error {
 	e, err := json.Marshal(response)
 	if err != nil {
 		return err
@@ -75,7 +74,7 @@ func (e *env) createTeam(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	if err := sendResponse(w, draw, teams, totalCount, totalFiltered); err != nil {
+	if err := sendResponse(w, team); err != nil {
 		sendError(w, err)
 		return
 	}
@@ -96,7 +95,8 @@ func (e *env) getTeamLeaderboard(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	if err := sendResponse(w, leaderboardQuery.Draw, teams, totalCount, totalFiltered); err != nil {
+	response := models.NewLeaderboardSuccessResponse(leaderboardQuery.Draw, teams, totalCount, totalFiltered)
+	if err := sendResponse(w, response); err != nil {
 		sendError(w, err)
 		return
 	}

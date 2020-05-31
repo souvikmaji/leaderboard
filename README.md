@@ -70,3 +70,7 @@ Visit: [127.0.0.1:8000](127.0.0.1:8000)
 -   Handle schema decoder errors
 -   move db operations from models to finder package
 -   Refactor setup router logic into a map in controller package
+-   CRUD apis for team
+-   Use redis for db
+-   Autoreload server
+-   atom fix import & autocomplete
