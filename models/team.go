@@ -2,30 +2,18 @@ package models
 
 // Team represets a fanatasy team created by the user consisting of many players
 type Team struct {
-	TeamID     uint `gorm:"primary_key"`
+	TeamID     uint `gorm:"primary_key" schema:"-"`
 	TeamName   string
 	UserID     int64
 	MatchID    int64
 	CaptainID  int64
 	VCaptainID int64
 	TotalScore float64
-	Rank       int64     `gorn:"-"`
+	Rank       int64 `gorm:"-" schema:"-"`
 }
 
-func newTeam(teamName string, userID, matchID, captainID, vCaptainID int64) *Team {
-	return &Team{
-		TeamName:   teamName,
-		UserID:     userID,
-		MatchID:    matchID,
-		CaptainID:  captainID,
-		VCaptainID: vCaptainID,
-	}
-}
-
-// CreateTeam creates a new team in the database
-func (db *DB) CreateTeam(teamName string, userID, matchID, captainID, vCaptainID int64) (team *Team, err error) {
-	team = newTeam(teamName, userID, matchID, captainID, vCaptainID)
-
+// SaveTeam saves a new team in the database
+func (db *DB) SaveTeam(team *Team) (err error) {
 	if err = db.DB.Create(team).Error; err != nil {
 		return
 	}

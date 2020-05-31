@@ -50,25 +50,10 @@ func (e *env) createTeam(w http.ResponseWriter, r *http.Request) {
 	team := new(models.Team)
 	err := e.decoder.Decode(team, r.PostForm)
 	if err != nil {
-		sendError(w, err)
-		return
+		fmt.Println("decode error", err)
 	}
-
-	lengthStr := params.Get("length")
-	length, err := strconv.ParseInt(lengthStr, 10, 64)
-	if err != nil {
-		sendError(w, err)
-		return
-	}
-
-	offsetStr := params.Get("start")
-	offset, err := strconv.ParseInt(offsetStr, 10, 64)
-	if err != nil {
-		sendError(w, err)
-		return
-	}
-
-	teams, totalCount, totalFiltered, err := e.db.AllTeams(length, offset)
+	fmt.Println("team:", team)
+	err = e.db.SaveTeam(team)
 	if err != nil {
 		sendError(w, err)
 		return
