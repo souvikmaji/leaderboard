@@ -13,6 +13,7 @@ import (
 
 func (e *env) setupRouter() *negroni.Negroni {
 	router := mux.NewRouter()
+	router.HandleFunc("/health", e.healthCheck)
 
 	teamRouter := router.PathPrefix("/team").Subrouter()
 	teamRouter.HandleFunc("/", e.createTeam).Methods("POST")

@@ -65,3 +65,7 @@ Visit: [127.0.0.1:8000](127.0.0.1:8000)
 -   Use datatable sorting feature
 -   Read database credentials at app start for the first time.
 -   Test with a larger dataset
+-   Initialize db using make
+-   Generalize team/player nomanclatures.
+-   Handle schema decoder errors
+-   Refactor setup router logic into a map in controller package

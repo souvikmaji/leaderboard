@@ -16,7 +16,7 @@ type env struct {
 }
 
 // health check endpoint
-func healthCheck(w http.ResponseWriter, r *http.Request) {
+func (e *env) healthCheck(w http.ResponseWriter, r *http.Request) {
 	json.NewEncoder(w).Encode(map[string]bool{"ok": true})
 }
 
