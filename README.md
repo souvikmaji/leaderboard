@@ -65,12 +65,13 @@ Visit: [127.0.0.1:8000](127.0.0.1:8000)
 -   Use datatable sorting feature
 -   Read database credentials at app start for the first time.
 -   Test with a larger dataset
--   Initialize db using make
 -   Generalize team/player nomanclatures.
 -   Handle schema decoder errors
 -   move db operations from models to finder package
 -   Refactor setup router logic into a map in controller package
 -   CRUD apis for team
+-   Initialize db using make
+-   Go script to populate db using crud apis
 -   Use redis for db
 -   Autoreload server
 -   atom fix import & autocomplete

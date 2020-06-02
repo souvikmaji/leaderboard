@@ -1,8 +1,11 @@
 package models
 
+import "github.com/jinzhu/gorm"
+
 // Team represets a fanatasy team created by the user consisting of many players
 type Team struct {
-	TeamID     uint `gorm:"primary_key" schema:"-"`
+	gorm.Model
+	TeamID     uint `gorm:"AUTO_INCREMENT" schema:"-"`
 	TeamName   string
 	UserID     int64
 	MatchID    int64

@@ -22,6 +22,7 @@ func (e *env) healthCheck(w http.ResponseWriter, r *http.Request) {
 }
 
 func sendError(w http.ResponseWriter, errMsg error) {
+	w.Header().Set("Content-Type", "application/json")
 	log.Println("Error: ", errMsg)
 	response := models.NewErrorResponse(errMsg)
 	e, err := json.Marshal(response)
@@ -34,6 +35,7 @@ func sendError(w http.ResponseWriter, errMsg error) {
 }
 
 func sendResponse(w http.ResponseWriter, response interface{}) error {
+	w.Header().Set("Content-Type", "application/json")
 	e, err := json.Marshal(response)
 	if err != nil {
 		return err
@@ -45,14 +47,17 @@ func sendResponse(w http.ResponseWriter, response interface{}) error {
 }
 
 func (e *env) createTeam(w http.ResponseWriter, r *http.Request) {
-	w.Header().Set("Content-Type", "application/json")
 
 	team := new(models.Team)
+	r.ParseForm()
 	err := e.decoder.Decode(team, r.PostForm)
 	if err != nil {
 		fmt.Println("decode error", err)
 	}
+
 	fmt.Println("team:", team)
+
+	// decoder := json.NewDecoder(req.Body)
 	err = e.db.SaveTeam(team)
 	if err != nil {
 		sendError(w, err)
@@ -67,7 +72,6 @@ func (e *env) createTeam(w http.ResponseWriter, r *http.Request) {
 }
 
 func (e *env) getTeamLeaderboard(w http.ResponseWriter, r *http.Request) {
-	w.Header().Set("Content-Type", "application/json")
 
 	leaderboardQuery := new(models.LeaderboardQuery)
 	e.decoder.Decode(leaderboardQuery, r.URL.Query())
