@@ -15,8 +15,6 @@ func (e *env) createTeam(w http.ResponseWriter, r *http.Request) {
 		fmt.Println("decode error", err)
 	}
 
-	fmt.Println("[REMOVE] team:", team)
-
 	// decoder := json.NewDecoder(req.Body)
 	err = e.db.SaveTeam(team)
 	if err != nil {

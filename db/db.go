@@ -9,6 +9,11 @@ import (
 
 // Datastore interface defines operations possible on the database for this app
 type Datastore interface {
+	// User operations
+	SaveUser(user *models.User) (err error)
+	GetUser(userQuery *models.User) (user *models.User, err error)
+
+	// Game operations
 	SaveTeam(team *models.Team) (err error)
 	AllTeams(length, offset int64) (teams []*models.Team, recordsTotal, recordsFiltered int64, err error)
 }

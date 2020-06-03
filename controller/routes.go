@@ -12,6 +12,10 @@ func (e *env) setupRouter() *negroni.Negroni {
 	router := mux.NewRouter()
 	router.HandleFunc("/health", e.healthCheck)
 
+	userRouter := router.PathPrefix("/user").Subrouter()
+	userRouter.HandleFunc("/", e.createUser).Methods("POST")
+	userRouter.HandleFunc("/", e.getUser).Methods("GET")
+
 	teamRouter := router.PathPrefix("/team").Subrouter()
 	teamRouter.HandleFunc("/", e.createTeam).Methods("POST")
 	teamRouter.HandleFunc("/leaderboard", e.getTeamLeaderboard)
