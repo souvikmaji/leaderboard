@@ -5,27 +5,11 @@ import (
 	"net/http"
 	"time"
 
-	"github.com/gorilla/mux"
-	"github.com/gorilla/schema"
 	_ "github.com/jinzhu/gorm/dialects/postgres"
+	"github.com/souvikmaji/leaderboard/controller"
 	"github.com/souvikmaji/leaderboard/db"
 	"github.com/souvikmaji/leaderboard/models"
-	"github.com/urfave/negroni"
 )
-
-func (e *env) setupRouter() *negroni.Negroni {
-	router := mux.NewRouter()
-	router.HandleFunc("/health", e.healthCheck)
-
-	teamRouter := router.PathPrefix("/team").Subrouter()
-	teamRouter.HandleFunc("/", e.createTeam).Methods("POST")
-	teamRouter.HandleFunc("/leaderboard", e.getTeamLeaderboard)
-
-	n := negroni.Classic()
-	n.UseHandler(router)
-
-	return n
-}
 
 func main() {
 	configuration := models.InitConfig()
@@ -36,14 +20,11 @@ func main() {
 	}
 	defer db.Close()
 
-	e := &env{
-		db:      db,
-		decoder: schema.NewDecoder(),
-	}
+	db.DB.AutoMigrate(&models.Team{})
 
 	listenAddr := configuration.GetServerAddress()
 	srv := &http.Server{
-		Handler:      e.setupRouter(),
+		Handler:      controller.Handlers(db),
 		Addr:         listenAddr,
 		WriteTimeout: 15 * time.Second,
 		ReadTimeout:  15 * time.Second,

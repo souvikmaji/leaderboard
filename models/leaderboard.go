@@ -1,5 +1,12 @@
 package models
 
+// LeaderboardQuery holds the query parameters for getting the leaderboard
+type LeaderboardQuery struct {
+	Draw   int64
+	Length int64
+	Start  int64
+}
+
 // LeaderboardSuccessResponse represents http success response structure required by datatable api
 type LeaderboardSuccessResponse struct {
 	Draw            int64   `json:"draw"`            // The draw counter that this object is a response to - from the draw parameter sent as part of the data request.
@@ -16,14 +23,4 @@ func NewLeaderboardSuccessResponse(draw int64, teams []*Team, totalCount, totalF
 		RecordsFiltered: totalFiltered,
 		Data:            teams,
 	}
-}
-
-// ErrorResponse represents http error response structure required by datatable api
-type ErrorResponse struct {
-	Error string // Optional: If an error occurs during the running of the server-side processing
-}
-
-// NewErrorResponse creates a new error response to be consumed by the databale api
-func NewErrorResponse(err error) ErrorResponse {
-	return ErrorResponse{Error: err.Error()}
 }
