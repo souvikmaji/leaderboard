@@ -60,19 +60,19 @@ Visit: [127.0.0.1:8000](127.0.0.1:8000)
 
 ## Things that can be improved / TODO
 
--   Unit tests
--   Hosting
--   Use datatable sorting feature
--   Read database credentials at app start for the first time.
--   Test with a larger dataset
--   Generalize team/player nomanclatures.
--   Handle schema decoder errors
--   move db operations from models to finder package
--   Refactor setup router logic into a map in controller package
--   CRUD apis for team
--   Initialize db using make
--   Go script to populate db using crud apis
--   Use redis for db
 -   Autoreload server
--   atom fix import & autocomplete
+-   Generalize team nomanclatures.
+-   CRUD apis for team
+-   CRUD apis for users
+-   Use datatable sorting feature
+-   Handle schema decoder errors
+-   Refactor setup router logic from a map
+-   User auth apis
+-   Initialize db using make
+-   Go data preperation script using db methods
+-   Use redis for db
+-   Benchmark with a larger dataset
+-   Read database credentials at app start for the first time.
 -   Integrate Swagger
+-   Hosting
+-   Unit tests
