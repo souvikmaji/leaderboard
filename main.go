@@ -8,6 +8,7 @@ import (
 	"github.com/gorilla/mux"
 	"github.com/gorilla/schema"
 	_ "github.com/jinzhu/gorm/dialects/postgres"
+	"github.com/souvikmaji/leaderboard/db"
 	"github.com/souvikmaji/leaderboard/models"
 	"github.com/urfave/negroni"
 )
@@ -29,7 +30,7 @@ func (e *env) setupRouter() *negroni.Negroni {
 func main() {
 	configuration := models.InitConfig()
 
-	db, err := models.NewDB(configuration.GetDbURI())
+	db, err := db.NewDB(configuration.GetDbURI())
 	if err != nil {
 		log.Fatalf("failed to connect database: %s", err.Error())
 	}

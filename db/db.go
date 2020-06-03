@@ -1,15 +1,16 @@
-package models
+package db
 
 import (
 	"log"
 
 	"github.com/jinzhu/gorm"
+	"github.com/souvikmaji/leaderboard/models"
 )
 
 // Datastore interface defines operations possible on the database for this app
 type Datastore interface {
-	SaveTeam(team *Team) (err error)
-	AllTeams(length, offset int64) (teams []*Team, recordsTotal, recordsFiltered int64, err error)
+	SaveTeam(team *models.Team) (err error)
+	AllTeams(length, offset int64) (teams []*models.Team, recordsTotal, recordsFiltered int64, err error)
 }
 
 // DB is the wrapper for gorm db object

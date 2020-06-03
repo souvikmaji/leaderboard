@@ -3,16 +3,18 @@ package main
 import (
 	"encoding/json"
 	"fmt"
-	"github.com/gorilla/schema"
-	"github.com/souvikmaji/leaderboard/models"
 	"log"
 	"net/http"
+
+	"github.com/gorilla/schema"
+	"github.com/souvikmaji/leaderboard/db"
+	"github.com/souvikmaji/leaderboard/models"
 )
 
 // all routes are implemented as method to this struct,
-// so that all routes can share the connection pool
+// so that all routes can share the connection pool and global variables
 type env struct {
-	db      models.Datastore
+	db      db.Datastore
 	decoder *schema.Decoder
 }
 

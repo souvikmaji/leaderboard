@@ -75,3 +75,4 @@ Visit: [127.0.0.1:8000](127.0.0.1:8000)
 -   Use redis for db
 -   Autoreload server
 -   atom fix import & autocomplete
+-   Integrate Swagger
