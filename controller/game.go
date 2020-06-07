@@ -1,9 +1,10 @@
 package controller
 
 import (
-	"fmt"
-	"github.com/souvikmaji/leaderboard/models"
+	"log"
 	"net/http"
+
+	"github.com/souvikmaji/leaderboard/models"
 )
 
 func (e *env) createGame(w http.ResponseWriter, r *http.Request) {
@@ -12,7 +13,7 @@ func (e *env) createGame(w http.ResponseWriter, r *http.Request) {
 	r.ParseForm()
 	err := e.decoder.Decode(game, r.PostForm)
 	if err != nil {
-		fmt.Println("decode error", err)
+		log.Println("decode error", err)
 	}
 
 	// decoder := json.NewDecoder(req.Body)
