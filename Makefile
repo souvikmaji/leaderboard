@@ -8,6 +8,9 @@ GOGET=$(GOCMD) get
 # Binary names
 BINARY_NAME=leaderboard
 
+# Server Prozy Port
+PROXY_PORT=8000
+
 all: test build run
   build:
 				$(GOBUILD) -o $(BINARY_NAME) -v
@@ -20,4 +23,5 @@ all: test build run
   run:
 				$(GOBUILD) -o $(BINARY_NAME) -v
 				./$(BINARY_NAME)
-
+  devrun:
+			  gin --port $(PROXY_PORT) --bin $(BINARY_NAME) --all --immediate

@@ -48,6 +48,14 @@ For running psql from a postgres user add `sudo -u postgres` at the begining of 
 
 Visit: [127.0.0.1:8000](127.0.0.1:8000)
 
+### Live Reload Server
+
+During development use the autoreload server
+
+```sh
+make devrun
+```
+
 ## Technologies Used
 
 -   [Golang](https://golang.org/)

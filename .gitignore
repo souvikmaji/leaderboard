@@ -16,3 +16,6 @@ leaderboard
 /vendor/
 /Godeps/
 bin/
+
+# DOTENV files
+.env
