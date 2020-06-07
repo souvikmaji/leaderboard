@@ -16,9 +16,9 @@ To see the database queries being generated while fetching data, set `database.l
 
 ### Prerequisites
 
-1.  Go with minimum version 1.13
-2.  make
-3.  PostgreSQL
+1. Go with minimum version 1.13
+2. make
+3. PostgreSQL
 
 ### Setup
 
@@ -36,7 +36,7 @@ make
 
 The application follows [12 factor](https://12factor.net/config) principals for configuration management. Configurations are read in the following manner `config.yml > .env > Exported Enviroment variables > Program Flags`.
 
-Visit: [127.0.0.1:8000](127.0.0.1:8000)
+Visit: <127.0.0.1:8000>
 
 ### Live Reload Server
 
@@ -48,29 +48,29 @@ make devrun
 
 ## Technologies Used
 
--   [Golang](https://golang.org/)
--   [GNU Make](https://www.gnu.org/software/make/manual/html_node/Introduction.html)
--   [Gorilla Mux as the HTTP router and URL matcher](https://github.com/gorilla/mux)
--   [Gorm as ORM](https://gorm.io/)
--   [Viper for externalized configuration](https://github.com/spf13/viper)
--   [PostgreSQL as the database](https://www.postgresql.org/)
--   [Datatables as the UI framework to display the leaderboard](https://datatables.net/)
+- [Golang](https://golang.org/)
+- [GNU Make](https://www.gnu.org/software/make/manual/html_node/Introduction.html)
+- [Gorilla Mux as the HTTP router and URL matcher](https://github.com/gorilla/mux)
+- [Gorm as ORM](https://gorm.io/)
+- [Viper for externalized configuration](https://github.com/spf13/viper)
+- [PostgreSQL as the database](https://www.postgresql.org/)
+- [Datatables as the UI framework to display the leaderboard](https://datatables.net/)
 
-## Things that can be improved / TODO
+# Things that can be improved / TODO
 
--   CRUD apis for game
--   CRUD apis for users
--   Use datatable sorting feature
--   Handle schema decoder errors
--   Refactor setup router logic from a map
--   User auth apis
--   Gameplay apis
--   DB script sample size from flag
--   Use redis for db
--   Benchmark with a larger dataset
--   Read database credentials at app start for the first time.
--   Integrate Swagger
--   AutomaticEnv not working
--   Add logger
--   Hosting
--   Unit tests
+- CRUD apis for game
+- CRUD apis for users
+- Use datatable sorting feature
+- Handle schema decoder errors
+- Refactor setup router logic from a map
+- User auth apis
+- Gameplay apis
+- DB script sample size from flag
+- Use redis for db
+- Benchmark with a larger dataset
+- Read database credentials at app start for the first time.
+- Integrate Swagger
+- AutomaticEnv not working
+- Add logger
+- Hosting
+- Unit tests
