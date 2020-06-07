@@ -40,7 +40,7 @@ psql leaderboard < scripts/dbdump
 make
 ```
 
-The default db name is `leaderboard`. To change the database name update the `config.yml` file or export corresponding environment variables.
+The default db name is `leaderboard`. To change the database name update the `config.yml` file or export corresponding environment variables or create a `.env` file. 
 
 Update
 
@@ -74,5 +74,6 @@ Visit: [127.0.0.1:8000](127.0.0.1:8000)
 -   Benchmark with a larger dataset
 -   Read database credentials at app start for the first time.
 -   Integrate Swagger
+-   AutomaticEnv not working
 -   Hosting
 -   Unit tests

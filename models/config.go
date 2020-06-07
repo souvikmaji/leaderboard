@@ -2,6 +2,7 @@ package models
 
 import (
 	"fmt"
+	"log"
 
 	"github.com/spf13/viper"
 )
@@ -31,13 +32,6 @@ type DatabaseConfigurations struct {
 
 // InitConfig initializes a new configuration object denoting app configurations
 func InitConfig() *Configurations {
-	// Set the file name of the configurations file
-	viper.SetConfigName("config")
-
-	// Set the path to look for the configurations file
-	viper.AddConfigPath(".")
-
-	viper.SetConfigType("yml")
 
 	// Enable VIPER to read Environment Variables
 	viper.AutomaticEnv()
@@ -46,15 +40,36 @@ func InitConfig() *Configurations {
 	viper.BindEnv("server.port", "PORT")
 	viper.BindEnv("database.url", "DATABASE_URL")
 
+	// read config.yml file
+	viper.SetConfigName("config")
+
+	// Path for config file is the project root
+	viper.AddConfigPath(".")
+
+	viper.SetConfigType("yml")
+
 	// read config
 	if err := viper.ReadInConfig(); err != nil {
-		fmt.Printf("Error reading config file, %s", err)
+		log.Fatal("Error reading config file1: ", err)
+	}
+
+	// Load .env file if present
+	viper.SetConfigName(".env")
+	viper.AddConfigPath(".")
+	viper.SetConfigType("env")
+
+	if err := viper.MergeInConfig(); err != nil {
+		if _, ok := err.(viper.ConfigFileNotFoundError); ok {
+			// Config file not found; ignore error
+		} else {
+			log.Fatal("Error reading .env file: ", err)
+		}
 	}
 
 	var configuration *Configurations
 	err := viper.Unmarshal(&configuration)
 	if err != nil {
-		fmt.Printf("Unable to decode into struct, %v", err)
+		log.Fatal("Unable to decode into struct: ", err)
 	}
 
 	return configuration
