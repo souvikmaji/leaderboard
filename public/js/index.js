@@ -9,18 +9,18 @@ $(document).ready(function () {
     ordering: false,
     searching: false,
     ajax: {
-      url: "/team/leaderboard",
+      url: "/game/leaderboard",
       dataSrc: "data"
     },
     columns: [{
         data: "Rank"
       },
       {
-        data: "TeamID",
+        data: "GameID",
         // orderable: false
       },
       {
-        data: "TeamName"
+        data: "GameName"
       },
       {
         data: "TotalScore",
@@ -33,5 +33,5 @@ $(document).ready(function () {
     // "deferRender": true
   };
 
-  $("#teams").DataTable(options);
+  $("#games").DataTable(options);
 });

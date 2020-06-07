@@ -20,7 +20,7 @@ func main() {
 	}
 	defer db.Close()
 
-	db.DB.AutoMigrate(&models.Team{})
+	db.DB.AutoMigrate(&models.Game{})
 	db.DB.AutoMigrate(&models.User{})
 
 	listenAddr := configuration.GetServerAddress()

@@ -6,7 +6,7 @@ Standalone REST web service to generate Fantasy sports leaderboard.
 
 Leaderboards in MMOGs and Fantasy sports are the most accessed screens. What makes fantasy leaderboard little complex than any other rank-based leaderboards is that two or more players can share the same rank. The ranks of the players holding the same score should remain the same and the next succeeding rank to be allocated to the next player and so on.
 
-In this project, we are using the SQL [rank function](http://www.sqltutorial.org/sql-window-functions/sql-rank/) to calculate team ranks.
+In this project, we are using the SQL [rank function](http://www.sqltutorial.org/sql-window-functions/sql-rank/) to calculate user ranks.
 
 The `OVER()` clause In the SQL RANK function is used to define that the entire table is being considered for calculation of the rank. The `ORDER BY` clause is used to sort the results in descending order.
 
@@ -40,7 +40,7 @@ psql leaderboard < scripts/dbdump
 make
 ```
 
-The default db name is `leaderboard`. To change the database name update the `config.yml` file or export corresponding environment variables or create a `.env` file. 
+The default db name is `leaderboard`. To change the database name update the `config.yml` file or export corresponding environment variables or create a `.env` file.
 
 Update
 
@@ -68,14 +68,13 @@ make devrun
 
 ## Things that can be improved / TODO
 
--   Autoreload server
--   Generalize team nomanclatures.
--   CRUD apis for team
+-   CRUD apis for game
 -   CRUD apis for users
 -   Use datatable sorting feature
 -   Handle schema decoder errors
 -   Refactor setup router logic from a map
 -   User auth apis
+-   Gameplay apis
 -   Initialize db using make
 -   Go data preperation script using db methods
 -   Use redis for db

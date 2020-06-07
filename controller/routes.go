@@ -16,9 +16,9 @@ func (e *env) setupRouter() *negroni.Negroni {
 	userRouter.HandleFunc("/", e.createUser).Methods("POST")
 	userRouter.HandleFunc("/", e.getUser).Methods("GET")
 
-	teamRouter := router.PathPrefix("/team").Subrouter()
-	teamRouter.HandleFunc("/", e.createTeam).Methods("POST")
-	teamRouter.HandleFunc("/leaderboard", e.getTeamLeaderboard)
+	gameRouter := router.PathPrefix("/game").Subrouter()
+	gameRouter.HandleFunc("/", e.createGame).Methods("POST")
+	gameRouter.HandleFunc("/leaderboard", e.getGameLeaderboard)
 
 	n := negroni.Classic()
 	n.UseHandler(router)

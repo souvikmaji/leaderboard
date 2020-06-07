@@ -14,8 +14,8 @@ type Datastore interface {
 	GetUser(userQuery *models.User) (user *models.User, err error)
 
 	// Game operations
-	SaveTeam(team *models.Team) (err error)
-	AllTeams(length, offset int64) (teams []*models.Team, recordsTotal, recordsFiltered int64, err error)
+	SaveGame(game *models.Game) (err error)
+	AllGames(length, offset int64) (games []*models.Game, recordsTotal, recordsFiltered int64, err error)
 }
 
 // DB is the wrapper for gorm db object
