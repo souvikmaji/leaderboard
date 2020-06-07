@@ -3,6 +3,7 @@ GOCMD=go
 GOBUILD=$(GOCMD) build
 GOCLEAN=$(GOCMD) clean
 GOTEST=$(GOCMD) test
+GORUN=$(GOCMD) run
 GOGET=$(GOCMD) get
 
 # Binary names
@@ -12,6 +13,8 @@ BINARY_NAME=leaderboard
 PROXY_PORT=8000
 
 all: test build run
+  init:
+			 $(GORUN) scripts/initdb.go
   build:
 				$(GOBUILD) -o $(BINARY_NAME) -v
   test:

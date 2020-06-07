@@ -22,27 +22,19 @@ To see the database queries being generated while fetching data, set `database.l
 
 ### Setup
 
-Create a database from the psql console with `CREATE DATABASE leaderboard;` or use the `createdb` tool (`createdb leaderboard`).
-
-Check if the database is being created successfully using `\l`. It will list all the databases for the current user.
-
-Run the following script to complete setup.
-
 ```sh
 # Get the code
 git clone https://github.com/souvikmaji/leaderboard
 cd leaderboard
 
-# Initialize data from the database dump
-psql leaderboard < scripts/dbdump
+# initialize database and tables
+make init
 
 # Build and run
 make
 ```
 
-The default db name is `leaderboard`. To change the database name update the `config.yml` file or export corresponding environment variables or create a `.env` file.
-
-For running psql from a postgres user add `sudo -u postgres` at the begining of the command.
+The application follows [12 factor](https://12factor.net/config) principals for configuration management. Configurations are read in the following manner `config.yml > .env > Exported Enviroment variables > Program Flags`.
 
 Visit: [127.0.0.1:8000](127.0.0.1:8000)
 
@@ -73,9 +65,7 @@ make devrun
 -   Refactor setup router logic from a map
 -   User auth apis
 -   Gameplay apis
--   Initialize db using make
--   Go data preperation script using db methods
--   DB script parameters as flag
+-   DB script sample size from flag
 -   Use redis for db
 -   Benchmark with a larger dataset
 -   Read database credentials at app start for the first time.
