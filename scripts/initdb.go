@@ -90,11 +90,13 @@ func connectDB(c *models.Configurations) (*db.DB, error) {
 			if err != nil {
 				return nil, err
 			}
-		} else {
-			// fail on errors other than db exist
-			return nil, err
+			return store, nil
 		}
+
+		// fail on errors other than db exist
+		return nil, err
 	}
+
 	return store, nil
 }
 
