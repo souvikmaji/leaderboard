@@ -82,5 +82,6 @@ make devrun
 -   Read database credentials at app start for the first time.
 -   Integrate Swagger
 -   AutomaticEnv not working
+-   Add logger
 -   Hosting
 -   Unit tests

@@ -1,8 +1,6 @@
 package db
 
 import (
-	"log"
-
 	"github.com/jinzhu/gorm"
 	"github.com/souvikmaji/leaderboard/models"
 )
@@ -35,8 +33,6 @@ func NewDB(dataSourceName string) (*DB, error) {
 	if err = db.DB().Ping(); err != nil {
 		return nil, err
 	}
-
-	log.Println("Connection established with db")
 
 	// return db wrapper
 	return &DB{db}, nil
