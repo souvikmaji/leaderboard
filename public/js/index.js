@@ -19,11 +19,11 @@ $(document).ready(function () {
         data: "GameID",
         // orderable: false
       },
+      // {
+      //   data: "GameName"
+      // },
       {
-        data: "GameName"
-      },
-      {
-        data: "TotalScore",
+        data: "Score",
         // orderable: false
       }
     ],

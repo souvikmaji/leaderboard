@@ -9,7 +9,7 @@ import (
 )
 
 func (e *env) setupRouter() *negroni.Negroni {
-	router := mux.NewRouter()
+	router := mux.NewRouter().StrictSlash(true)
 	router.HandleFunc("/health", e.healthCheck)
 
 	userRouter := router.PathPrefix("/user").Subrouter()
@@ -18,7 +18,8 @@ func (e *env) setupRouter() *negroni.Negroni {
 
 	gameRouter := router.PathPrefix("/game").Subrouter()
 	gameRouter.HandleFunc("/", e.createGame).Methods("POST")
-	gameRouter.HandleFunc("/leaderboard", e.getGameLeaderboard)
+	// gameRouter.HandleFunc("/", e.createGame).Methods("POST")
+	gameRouter.HandleFunc("/leaderboard", e.getGameLeaderboard).Methods("GET")
 
 	n := negroni.Classic()
 	n.UseHandler(router)

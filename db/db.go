@@ -13,7 +13,10 @@ type Datastore interface {
 
 	// Game operations
 	SaveGame(game *models.Game) (err error)
-	AllGames(length, offset int64) (games []*models.Game, recordsTotal, recordsFiltered int64, err error)
+
+	// Game to User operations
+	SaveGameUser(game *models.GameUser) (err error)
+	GetAllSortedGameUser(length, offset int64) (games []*models.GameUser, recordsTotal, recordsFiltered int64, err error)
 }
 
 // DB is the wrapper for gorm db object

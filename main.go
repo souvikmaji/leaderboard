@@ -20,9 +20,6 @@ func main() {
 	}
 	defer db.Close()
 
-	db.DB.AutoMigrate(&models.Game{})
-	db.DB.AutoMigrate(&models.User{})
-
 	listenAddr := configuration.GetServerAddress()
 	srv := &http.Server{
 		Handler:      controller.Handlers(db),

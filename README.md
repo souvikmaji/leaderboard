@@ -42,8 +42,6 @@ make
 
 The default db name is `leaderboard`. To change the database name update the `config.yml` file or export corresponding environment variables or create a `.env` file.
 
-Update
-
 For running psql from a postgres user add `sudo -u postgres` at the begining of the command.
 
 Visit: [127.0.0.1:8000](127.0.0.1:8000)
@@ -77,6 +75,7 @@ make devrun
 -   Gameplay apis
 -   Initialize db using make
 -   Go data preperation script using db methods
+-   DB script parameters as flag
 -   Use redis for db
 -   Benchmark with a larger dataset
 -   Read database credentials at app start for the first time.
