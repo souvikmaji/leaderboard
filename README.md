@@ -1,6 +1,6 @@
 # Leaderboard
 
-![GitHub](https://img.shields.io/github/license/souvikmaji/leaderboard) ![Codacy grade](https://img.shields.io/codacy/grade/a0b36eaed7b74ec6be460ceda499bf2c)
+![GitHub](https://img.shields.io/github/license/souvikmaji/leaderboard) [![Maintainability](https://api.codeclimate.com/v1/badges/2a9a5bb2bf0935181799/maintainability)](https://codeclimate.com/github/souvikmaji/leaderboard/maintainability)
 
 Standalone REST web service to generate Fantasy sports leaderboard.
 
