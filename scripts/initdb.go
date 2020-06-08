@@ -36,21 +36,23 @@ func main() {
 	db.DB.AutoMigrate(&models.User{})
 	db.DB.AutoMigrate(&models.GameUser{})
 
-	prepareData(db)
+	if err := prepareData(db); err != nil {
+		log.Fatalln("Failed preparing sample data:", err)
+	}
 
 	log.Println("Successfully initialized database with sample data")
 }
 
-func prepareData(db *db.DB) {
+func prepareData(db *db.DB) error {
 	userCount := 1000
 
 	_, totalUser, _, err := db.GetAllSortedGameUser(0, 0)
 	if err != nil {
-		fmt.Println("err:", err)
+		return fmt.Errorf("Error fetching game user data")
 	}
 	if totalUser >= int64(userCount) {
 		log.Printf("Total %d sample user present\n", totalUser)
-		return
+		return nil
 	}
 
 	log.Println("Preparing data")
@@ -59,7 +61,9 @@ func prepareData(db *db.DB) {
 	game := &models.Game{
 		Name: faker.Word(),
 	}
-	db.SaveGame(game)
+	if err := db.SaveGame(game); err != nil {
+		return fmt.Errorf("Error creating game %v", err)
+	}
 
 	log.Printf("Creating %d new users and joining game: %s\n", userCount, game.Name)
 	bar := pb.Full.Start(userCount)
@@ -69,17 +73,21 @@ func prepareData(db *db.DB) {
 			Username: faker.Username(),
 			Email:    faker.Email(),
 		}
-		err := db.SaveUser(user)
-		if err != nil {
-			log.Print("Error saving user", err)
+
+		if err := db.SaveUser(user); err != nil {
+			return fmt.Errorf("Error saving user %v", err)
 		}
 
-		db.SaveGameUser(&models.GameUser{UserID: user.ID, GameID: game.ID, Score: rand.Float64() * 100})
+		if err = db.SaveGameUser(&models.GameUser{UserID: user.ID, GameID: game.ID, Score: rand.Float64() * 100}); err != nil {
+			return fmt.Errorf("Error saving game user %v", err)
+		}
 		bar.Increment()
 	}
 
 	bar.Finish()
 	log.Print("Users created")
+
+	return nil
 }
 
 func connectDB(c *models.Configurations) (*db.DB, error) {
