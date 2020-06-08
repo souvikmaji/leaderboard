@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"log"
 	"net/http"
 	"time"
@@ -8,14 +9,18 @@ import (
 	_ "github.com/jinzhu/gorm/dialects/postgres"
 	"github.com/souvikmaji/leaderboard/controller"
 	"github.com/souvikmaji/leaderboard/db"
+	"github.com/souvikmaji/leaderboard/models"
 )
 
 func main() {
-	configuration := initConfig()
+	configuration, err := models.InitConfig()
+	if err != nil {
+		log.Fatalln("Error initializing configurations", err)
+	}
 
 	db, err := db.NewDB(configuration)
 	if err != nil {
-		log.Fatalf("failed to connect database: %s", err.Error())
+		log.Fatalln("Failed to connect database: ", err)
 	}
 	defer db.Close()
 
@@ -34,4 +39,10 @@ func main() {
 		log.Fatalf("Could not listen on %s: %v\n", listenAddr, err)
 	}
 
+}
+
+// getServerAddress parses configurations and returns https server address in
+// <address:port> format
+func getServerAddress(c *models.Configurations) string {
+	return fmt.Sprintf("%s:%d", c.Server.Host, c.Server.Port)
 }

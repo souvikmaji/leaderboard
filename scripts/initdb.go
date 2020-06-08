@@ -16,7 +16,11 @@ import (
 )
 
 func main() {
-	configuration := models.InitConfig()
+	configuration, err := models.InitConfig()
+	if err != nil {
+		log.Fatalln("error initializing configuration", err)
+	}
+
 	log.Println("Connecting to datbase: ", configuration.Database.Name)
 
 	// try connecting to database
@@ -69,7 +73,7 @@ func prepareData(db *db.DB) {
 }
 
 func connectDB(c *models.Configurations) (*db.DB, error) {
-	store, err := db.NewDB(c.GetDbURI())
+	store, err := db.NewDB(c)
 	if err != nil {
 		// if database does not exist
 		if err, ok := err.(*pq.Error); ok && err.Code.Name() == "invalid_catalog_name" {
@@ -86,7 +90,7 @@ func connectDB(c *models.Configurations) (*db.DB, error) {
 			// try reconnecting
 			log.Println("Reconnecting to datbase: ", c.Database.Name)
 
-			store, err = db.NewDB(c.GetDbURI())
+			store, err = db.NewDB(c)
 			if err != nil {
 				return nil, err
 			}
