@@ -2,6 +2,7 @@ package main
 
 import (
 	"errors"
+	"fmt"
 	"log"
 	"math/rand"
 	"os/exec"
@@ -18,7 +19,7 @@ import (
 func main() {
 	configuration, err := models.InitConfig()
 	if err != nil {
-		log.Fatalln("error initializing configuration", err)
+		log.Fatalln("Error initializing configuration", err)
 	}
 
 	log.Println("Connecting to datbase: ", configuration.Database.Name)
@@ -26,7 +27,7 @@ func main() {
 	// try connecting to database
 	db, err := connectDB(configuration)
 	if err != nil {
-		log.Fatalln("failed to connect database: ", err)
+		log.Fatalln("Failed to connect database: ", err)
 	}
 	defer db.Close()
 
@@ -76,24 +77,15 @@ func connectDB(c *models.Configurations) (*db.DB, error) {
 	store, err := db.NewDB(c)
 	if err != nil {
 		// if database does not exist
-		if err, ok := err.(*pq.Error); ok && err.Code.Name() == "invalid_catalog_name" {
+		var e *pq.Error
+		if errors.As(err, &e) && e.Code.Name() == "invalid_catalog_name" {
 			log.Println("Database does not exist")
-			out, err := createDB(c)
 
-			// error creating database
-			if err != nil {
-				log.Printf("Error: %v", err)
-				return nil, errors.New(string(out))
-			}
-			log.Println("Database created successfully")
-
-			// try reconnecting
-			log.Println("Reconnecting to datbase: ", c.Database.Name)
-
-			store, err = db.NewDB(c)
+			store, err := createDB(c)
 			if err != nil {
 				return nil, err
 			}
+
 			return store, nil
 		}
 
@@ -104,8 +96,28 @@ func connectDB(c *models.Configurations) (*db.DB, error) {
 	return store, nil
 }
 
-func createDB(c *models.Configurations) ([]byte, error) {
+func createDB(c *models.Configurations) (*db.DB, error) {
 	log.Println("Creating Datbase", c.Database.Name)
+
+	// error creating database
+	if out, err := pqCreateDB(c); err != nil {
+		log.Printf("Error: %v", string(out))
+		return nil, fmt.Errorf("Error creating database: %v", err)
+	}
+	log.Println("Database created successfully")
+
+	// try reconnecting
+	log.Println("Reconnecting to datbase:", c.Database.Name)
+
+	store, err := db.NewDB(c)
+	if err != nil {
+		return nil, fmt.Errorf("Error reconnecting to newly created db: %v", err)
+	}
+
+	return store, nil
+}
+
+func pqCreateDB(c *models.Configurations) ([]byte, error) {
 
 	cmd := exec.Command("createdb", "--host", c.Database.Host, "--port", strconv.Itoa(c.Database.Port),
 		"--username", c.Database.Username, "--owner", c.Database.Username, c.Database.Name, "--echo")
