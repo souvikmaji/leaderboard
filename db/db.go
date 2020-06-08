@@ -1,6 +1,8 @@
 package db
 
 import (
+	"fmt"
+
 	"github.com/jinzhu/gorm"
 	"github.com/souvikmaji/leaderboard/models"
 )
@@ -25,9 +27,9 @@ type DB struct {
 }
 
 // NewDB creates a new database connection
-func NewDB(dataSourceName string) (*DB, error) {
+func NewDB(c *models.Configurations) (*DB, error) {
 	// open new daatabase connection
-	db, err := gorm.Open("postgres", dataSourceName)
+	db, err := gorm.Open("postgres", getDbURI(c))
 	if err != nil {
 		return nil, err
 	}
@@ -39,4 +41,21 @@ func NewDB(dataSourceName string) (*DB, error) {
 
 	// return db wrapper
 	return &DB{db}, nil
+}
+
+// getDbURI parses configurations and returns database server address in
+// postgreSQL connection string format
+func getDbURI(c *models.Configurations) string {
+	if c.Database.URL != "" {
+		return c.Database.URL
+	}
+
+	connectionString := fmt.Sprintf("host=%s port=%d user=%s dbname=%s sslmode=disable",
+		c.Database.Host, c.Database.Port, c.Database.Username, c.Database.Name)
+
+	if c.Database.Password != "" {
+		connectionString = fmt.Sprintf("%s password=%s", connectionString, c.Database.Password)
+	}
+
+	return connectionString
 }

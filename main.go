@@ -14,7 +14,7 @@ import (
 func main() {
 	configuration := models.InitConfig()
 
-	db, err := db.NewDB(configuration.GetDbURI())
+	db, err := db.NewDB(configuration)
 	if err != nil {
 		log.Fatalf("failed to connect database: %s", err.Error())
 	}
