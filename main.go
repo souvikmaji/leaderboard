@@ -8,11 +8,10 @@ import (
 	_ "github.com/jinzhu/gorm/dialects/postgres"
 	"github.com/souvikmaji/leaderboard/controller"
 	"github.com/souvikmaji/leaderboard/db"
-	"github.com/souvikmaji/leaderboard/models"
 )
 
 func main() {
-	configuration := models.InitConfig()
+	configuration := initConfig()
 
 	db, err := db.NewDB(configuration)
 	if err != nil {
@@ -20,7 +19,7 @@ func main() {
 	}
 	defer db.Close()
 
-	listenAddr := configuration.GetServerAddress()
+	listenAddr := getServerAddress(configuration)
 	srv := &http.Server{
 		Handler:      controller.Handlers(db),
 		Addr:         listenAddr,

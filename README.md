@@ -56,11 +56,14 @@ make devrun
 - [PostgreSQL as the database](https://www.postgresql.org/)
 - [Datatables as the UI framework to display the leaderboard](https://datatables.net/)
 
-# Things that can be improved / TODO
+## TODO
 
+- Revisit error handlings
 - CRUD apis for game
 - CRUD apis for users
+- Integrate validators
 - Use datatable sorting feature
+- Datatable filter by game id/ name
 - Handle schema decoder errors
 - Refactor setup router logic from a map
 - User auth apis
