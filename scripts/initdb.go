@@ -42,6 +42,17 @@ func main() {
 }
 
 func prepareData(db *db.DB) {
+	userCount := 1000
+
+	_, totalUser, _, err := db.GetAllSortedGameUser(0, 0)
+	if err != nil {
+		fmt.Println("err:", err)
+	}
+	if totalUser >= int64(userCount) {
+		log.Printf("Total %d sample user present\n", totalUser)
+		return
+	}
+
 	log.Println("Preparing data")
 	log.Println("Creating game")
 
@@ -49,8 +60,6 @@ func prepareData(db *db.DB) {
 		Name: faker.Word(),
 	}
 	db.SaveGame(game)
-
-	userCount := 1000
 
 	log.Printf("Creating %d new users and joining game: %s\n", userCount, game.Name)
 	bar := pb.Full.Start(userCount)
