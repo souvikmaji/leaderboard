@@ -2,9 +2,9 @@
 
 ![GitHub](https://img.shields.io/github/license/souvikmaji/leaderboard) [![Maintainability](https://api.codeclimate.com/v1/badges/2a9a5bb2bf0935181799/maintainability)](https://codeclimate.com/github/souvikmaji/leaderboard/maintainability)
 
-Standalone REST web service to generate Fantasy sports leaderboard.
+Standalone REST web service to generate Fantasy MMOG Leaderboard.
 
-Leaderboards in MMOGs and Fantasy sports are the most accessed screens. What makes fantasy leaderboard little complex than any other rank-based leaderboards is that two or more players can share the same rank. The ranks of the players holding the same score should remain the same and the next succeeding rank to be allocated to the next player and so on.
+Leaderboards are the most accessed screens in any MMOGs. What makes leaderboard calculation little complex than any other rank-based leaderboards is that two or more players can share the same rank. The ranks of the players holding the same score should remain the same and the next succeeding rank to be allocated to the next player and so on.
 
 In this project, we are using the SQL [rank function](http://www.sqltutorial.org/sql-window-functions/sql-rank/) to calculate user ranks.
 
@@ -58,14 +58,14 @@ make devrun
 
 ## TODO
 
-- Revisit error handlings
+- Handle schema decoder errors
+- r.Parse with ParseForm
+- Refactor setup router logic from a map
 - CRUD apis for game
 - CRUD apis for users
 - Integrate validators
 - Use datatable sorting feature
 - Datatable filter by game id/ name
-- Handle schema decoder errors
-- Refactor setup router logic from a map
 - User auth apis
 - Gameplay apis
 - DB script sample size from flag
