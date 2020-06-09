@@ -1,7 +1,6 @@
 package controller
 
 import (
-	"log"
 	"net/http"
 
 	"github.com/souvikmaji/leaderboard/models"
@@ -10,12 +9,9 @@ import (
 func (e *env) createUser(w http.ResponseWriter, r *http.Request) {
 	user := new(models.User)
 
-	if err := r.ParseForm(); err != nil {
+	if err := e.parsePostRequest(r, user); err != nil {
 		sendError(w, err)
-	}
-
-	if err := e.decoder.Decode(user, r.PostForm); err != nil {
-		log.Println("decode error", err)
+		return
 	}
 
 	if err := e.db.SaveUser(user); err != nil {
@@ -32,7 +28,11 @@ func (e *env) createUser(w http.ResponseWriter, r *http.Request) {
 
 func (e *env) getUser(w http.ResponseWriter, r *http.Request) {
 	userQuery := new(models.User)
-	e.decoder.Decode(userQuery, r.URL.Query())
+
+	if err := e.decoder.Decode(userQuery, r.URL.Query()); err != nil {
+		sendError(w, err)
+		return
+	}
 
 	user, err := e.db.GetUser(userQuery)
 	if err != nil {

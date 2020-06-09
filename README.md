@@ -58,8 +58,6 @@ make devrun
 
 ## TODO
 
-- Handle schema decoder errors
-- r.Parse with ParseForm
 - Refactor setup router logic from a map
 - CRUD apis for game
 - CRUD apis for users

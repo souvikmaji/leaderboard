@@ -9,7 +9,10 @@ import (
 func (e *env) getGameLeaderboard(w http.ResponseWriter, r *http.Request) {
 
 	leaderboardQuery := new(models.LeaderboardQuery)
-	e.decoder.Decode(leaderboardQuery, r.URL.Query())
+	if err := e.decoder.Decode(leaderboardQuery, r.URL.Query()); err != nil {
+		sendError(w, err)
+		return
+	}
 
 	games, totalCount, totalFiltered, err := e.db.GetAllSortedGameUser(leaderboardQuery.Length, leaderboardQuery.Start)
 	if err != nil {
