@@ -14,11 +14,19 @@ type env struct {
 	decoder *schema.Decoder
 }
 
+// Handlers setsup routers and initializes controller common environments
 func Handlers(datastore *db.DB) *negroni.Negroni {
+
 	e := &env{
 		db:      datastore,
-		decoder: schema.NewDecoder(),
+		decoder: setupDecoder(),
 	}
 
 	return e.setupRouter()
+}
+
+func setupDecoder() *schema.Decoder {
+	d := schema.NewDecoder()
+	d.IgnoreUnknownKeys(true)
+	return d
 }
