@@ -1,7 +1,6 @@
 package controller
 
 import (
-	"log"
 	"net/http"
 
 	"github.com/souvikmaji/leaderboard/models"
@@ -10,15 +9,18 @@ import (
 func (e *env) createGame(w http.ResponseWriter, r *http.Request) {
 
 	game := new(models.Game)
-	r.ParseForm()
-	err := e.decoder.Decode(game, r.PostForm)
-	if err != nil {
-		log.Println("decode error", err)
+
+	if err := r.ParseForm(); err != nil {
+		sendError(w, err)
+		return
 	}
 
-	// decoder := json.NewDecoder(req.Body)
-	err = e.db.SaveGame(game)
-	if err != nil {
+	if err := e.decoder.Decode(game, r.PostForm); err != nil {
+		sendError(w, err)
+		return
+	}
+
+	if err := e.db.SaveGame(game); err != nil {
 		sendError(w, err)
 		return
 	}

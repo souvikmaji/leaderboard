@@ -10,19 +10,17 @@ import (
 func (e *env) createUser(w http.ResponseWriter, r *http.Request) {
 	user := new(models.User)
 
-	err := r.ParseForm()
-	if err != nil {
+	if err := r.ParseForm(); err != nil {
 		sendError(w, err)
 	}
 
-	err = e.decoder.Decode(user, r.PostForm)
-	if err != nil {
+	if err := e.decoder.Decode(user, r.PostForm); err != nil {
 		log.Println("decode error", err)
 	}
 
 	// decoder := json.NewDecoder(req.Body)
-	err = e.db.SaveUser(user)
-	if err != nil {
+
+	if err := e.db.SaveUser(user); err != nil {
 		sendError(w, err)
 		return
 	}
