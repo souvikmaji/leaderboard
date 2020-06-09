@@ -1,6 +1,10 @@
 package controller
 
 import (
+	"encoding/json"
+	"errors"
+	"net/http"
+
 	"github.com/gorilla/schema"
 	"github.com/souvikmaji/leaderboard/db"
 	"github.com/urfave/negroni"
@@ -34,4 +38,40 @@ func setupDecoder() *schema.Decoder {
 	d := schema.NewDecoder()
 	d.IgnoreUnknownKeys(true)
 	return d
+}
+
+// dst must be a pointer to a struct
+func (e *env) parsePostRequest(r *http.Request, dst interface{}) error {
+
+	switch contentType := r.Header.Get("Content-type"); contentType {
+	case contentApplicationJSON:
+		return e.parseJSONRequest(r, dst)
+	case contentXFormURLEncoded:
+		return e.parseFormRequest(r, dst)
+	default:
+		return errors.New("Unknown content type")
+	}
+
+}
+
+func (e *env) parseJSONRequest(r *http.Request, dst interface{}) error {
+
+	if err := json.NewDecoder(r.Body).Decode(dst); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (e *env) parseFormRequest(r *http.Request, dst interface{}) error {
+
+	if err := r.ParseForm(); err != nil {
+		return err
+	}
+
+	if err := e.decoder.Decode(dst, r.PostForm); err != nil {
+		return err
+	}
+
+	return nil
 }
