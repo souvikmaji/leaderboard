@@ -7,7 +7,7 @@ import (
 )
 
 func sendResponse(w http.ResponseWriter, response interface{}) error {
-	w.Header().Set("Content-Type", "application/json")
+	w.Header().Set("Content-Type", contentApplicationJSON)
 
 	e, err := json.Marshal(response)
 	if err != nil {
@@ -30,7 +30,7 @@ func newErrorResponse(err error) errorResponse {
 }
 
 func sendError(w http.ResponseWriter, errMsg error) {
-	w.Header().Set("Content-Type", "application/json")
+	w.Header().Set("Content-Type", contentApplicationJSON)
 	log.Println("Error: ", errMsg)
 
 	response := newErrorResponse(errMsg)

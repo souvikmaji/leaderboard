@@ -6,6 +6,11 @@ import (
 	"github.com/urfave/negroni"
 )
 
+const (
+	contentApplicationJSON = "application/json"
+	contentXFormURLEncoded = "application/x-www-form-urlencoded"
+)
+
 // env represets a controller Environment
 // all routes are implemented as method to this struct,
 // so that all routes can share the connection pool and global variables

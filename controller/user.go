@@ -18,8 +18,6 @@ func (e *env) createUser(w http.ResponseWriter, r *http.Request) {
 		log.Println("decode error", err)
 	}
 
-	// decoder := json.NewDecoder(req.Body)
-
 	if err := e.db.SaveUser(user); err != nil {
 		sendError(w, err)
 		return
