@@ -6,4 +6,5 @@ type GameUser struct {
 	UserID uint
 	Score  float64
 	Rank   int64 `gorm:"-" schema:"-"`
+	Game   *Game
 }

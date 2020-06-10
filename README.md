@@ -58,7 +58,6 @@ make devrun
 
 ## TODO
 
-- Refactor setup router logic from a map
 - CRUD apis for game
 - CRUD apis for users
 - Integrate validators

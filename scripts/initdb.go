@@ -56,11 +56,12 @@ func prepareData(db *db.DB) error {
 	}
 
 	log.Println("Preparing data")
-	log.Println("Creating game")
 
 	game := &models.Game{
 		Name: faker.Word(),
 	}
+
+	log.Println("Creating game", game.Name)
 	if err := db.SaveGame(game); err != nil {
 		return fmt.Errorf("Error creating game %v", err)
 	}

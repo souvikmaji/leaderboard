@@ -19,9 +19,9 @@ $(document).ready(function () {
         data: "GameID",
         // orderable: false
       },
-      // {
-      //   data: "GameName"
-      // },
+      {
+        data: "Game.Name"
+      },
       {
         data: "Score",
         // orderable: false
