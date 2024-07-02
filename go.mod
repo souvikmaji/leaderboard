@@ -13,7 +13,7 @@ require (
 	github.com/spf13/afero v1.8.2 // indirect
 	github.com/spf13/viper v1.10.1
 	github.com/urfave/negroni v1.0.0
-	golang.org/x/sys v0.0.0-20220330033206-e17cdc41300f // indirect
+	golang.org/x/sys v0.1.0 // indirect
 	gopkg.in/check.v1 v1.0.0-20200227125254-8fa46927fb4f // indirect
 	gopkg.in/ini.v1 v1.66.4 // indirect
 )
